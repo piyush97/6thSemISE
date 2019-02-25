@@ -1,83 +1,73 @@
-//Pass-1 of two-pass assembler
 #include<stdio.h>
 #include<string.h>
 #include<stdlib.h>
+
 void main()
 {
-	FILE *f1,*f2,*f3,*f4;
-	f1=fopen("input.txt","r");
-	f3=fopen("symtab.txt","w");
-	f4=fopen("output.txt","w");
-	int lc,sa;
-	char label[20],opcode[20],operand[20];
-	fscanf(f1,"%s %s %s",label,opcode,operand);
+ char label[10],opcode[10],operand[10],code[10][10],ch;
+ char mnemonic[10][10]={"START","LDA","LDCH","STA","STCH","LDT","END"};
+ int locctr,start,end,length,i=0,j=0;
+ FILE *fp1,*fp2,*fp3;
+ 
+ fp1=fopen("input.dat","r");
+ fp2=fopen("symtab.dat","w");
+ fp3=fopen("out.dat","w");
 
-	if(strcmp(opcode,"START")==0)
-	{
-		sa=strtol(operand,NULL,16);
-		fprintf(f4,"%X\t%s\t%s\t%s\n",sa,label,opcode,operand);
-	}
-	else
-		sa=0;
-	lc=sa;
+ fscanf(fp1,"%s%s%s",label,opcode,operand);
+ 
+ if(strcmp(opcode,"START")==0)
+ {
+    start=(int) strtol(operand,NULL,16);
+    locctr=start;
+    fprintf(fp3,"\t%s\t%s\t%s\n",label,opcode,operand);
+    fscanf(fp1,"%s%s%s",label,opcode,operand);
+ }
+ else
+ locctr=0;
 
-	fscanf(f1,"%s %s %s",label,opcode,operand);
-	while(strcmp(opcode,"END")!=0)
-	{
-		fprintf(f4,"%X\t%s\t%s\t%s\n",lc,label,opcode,operand);
-		
-		if(strcmp(label,"-")!=0)
-		{
-			fprintf(f3,"%s\t%X\n",label,lc);
-		}
-		
-		char tempcode[20],tempval[20];
-		f2=fopen("optab.txt","r");
-		fscanf(f2,"%s %s",tempcode,tempval);
-		while(!feof(f2))
-		{
-			if(strcmp(opcode,tempcode)==0)
-			{
-				lc+=3;
-				break;
-			}
-			fscanf(f2,"%s %s",tempcode,tempval);
-		}
-		fclose(f2);
+ while(strcmp(opcode,"END")!=0)
+ {
+    i=0;
+    j=0;
+    fprintf(fp3,"%x",locctr);
+    if(strcmp(label,"**")!=0)
+    fprintf(fp2,"%s\t%x\n",label,locctr);
 
-		if(strcmp(opcode,"WORD")==0)
-		{
-			lc+=3;
-		}
+    strcpy(code[i],mnemonic[j]);
+    while(strcmp(mnemonic[j],"END")!=0)
+    {
+     if(strcmp(opcode,mnemonic[j])==0)
+     {
+        locctr+=3;
+        break;
+     }
+     strcpy(code[i],mnemonic[j]);
+     j++;
+    }
 
-		if(strcmp(opcode,"RESW")==0)
-		{
-			lc=lc+(3*(strtol(operand,NULL,10)));
-		}
+    if(strcmp(opcode,"WORD")==0)
+    locctr+=3;
+    else if(strcmp(opcode,"RESW")==0)
+    locctr+=(3*(atoi(operand)));
+    else if(strcmp(opcode,"RESB")==0)
+    locctr+=(atoi(operand));
+    else if(strcmp(opcode,"BYTE")==0)
+    locctr++;
+    
+    fprintf(fp3,"\t%s\t%s\t%s\n",label,opcode,operand);
+    fscanf(fp1,"%s%s%s",label,opcode,operand);
+ }
 
-		if(strcmp(opcode,"RESB")==0)
-		{
-			lc=lc+strtol(operand,NULL,10);
-		}
+ fprintf(fp3,"%x\t%s\t%s\t%s\n",locctr,label,opcode,operand);
+fclose(fp1);
+fclose(fp2);
+fclose(fp3);
 
-		if(strcmp(opcode,"BYTE")==0)
-		{
-			if(operand[0]=='X')
-				lc++;
-			else
-				lc=lc+strlen(operand)-3;
-		}
-
-
-
-		fscanf(f1,"%s %s %s",label,opcode,operand);
-
-
-	}
-	fprintf(f4,"%X\t%s\t%s\t%s\n",lc,label,opcode,operand);
-
-	printf("\nOutput File generated as output.dat\n");
-	fclose(f1);
-	fclose(f4);
-	fclose(f3);
+ fp3=fopen("out.dat","r");
+ ch=fgetc(fp3);
+ while(ch!=EOF)
+ {
+    printf("%c",ch);
+    ch=fgetc(fp3);
+ }
 }
