@@ -1,9 +1,10 @@
+//Pass-1 of two-pass assembler
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
-int main()
+
+void main()
 {
-	FILE *inputFile, *symtabFile, *outputFile;
+	FILE *inputFile, *optabFile, *symtabFile, *outputFile;
 	inputFile = fopen("input.txt", "r");
 	symtabFile = fopen("symtab.txt", "w");
 	outputFile = fopen("output.txt", "w");
@@ -30,6 +31,20 @@ int main()
 			fprintf(symtabFile, "%s\t%X\n", label, lc);
 		}
 
+		char tempcode[20], tempval[20];
+		optabFile = fopen("optab.txt", "r");
+		fscanf(optabFile, "%s %s", tempcode, tempval);
+		while (!feof(optabFile))
+		{
+			if (strcmp(opcode, tempcode) == 0)
+			{
+				lc += 3;
+				break;
+			}
+			fscanf(optabFile, "%s %s", tempcode, tempval);
+		}
+		fclose(optabFile);
+
 		if (strcmp(opcode, "WORD") == 0)
 		{
 			lc += 3;
@@ -52,6 +67,7 @@ int main()
 			else
 				lc = lc + strlen(operand) - 3;
 		}
+
 		fscanf(inputFile, "%s %s %s", label, opcode, operand);
 	}
 	fprintf(outputFile, "%X\t%s\t%s\t%s\n", lc, label, opcode, operand);
@@ -60,5 +76,4 @@ int main()
 	fclose(inputFile);
 	fclose(outputFile);
 	fclose(symtabFile);
-	return 0;
 }
