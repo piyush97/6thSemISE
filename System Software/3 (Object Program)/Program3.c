@@ -4,20 +4,20 @@
 #include <string.h>
 int main()
 {
-    FILE *f1;
+    FILE *output;
     int textlen = 0;
     char label[20], opcode[20], operand[20];
     int address, sa, len;
     char textrec[80], saddress[20], objcode[20], temp[80], startaddr[20];
     printf("\nObject Program:-\n\n");
-    f1 = fopen("output.txt", "r");
+    output = fopen("output.txt", "r");
 
-    fscanf(f1, "%s %s %s %s %s", saddress, label, opcode, operand, objcode);
+    fscanf(output, "%s %s %s %s %s", saddress, label, opcode, operand, objcode);
     strcpy(startaddr, saddress);
 
     printf("H %s %s %06X\n", label, saddress, len);
 
-    fscanf(f1, "%s %s %s %s %s", saddress, label, opcode, operand, objcode);
+    fscanf(output, "%s %s %s %s %s", saddress, label, opcode, operand, objcode);
 
     strcpy(temp, "");
     strcpy(textrec, "T 00");
@@ -30,7 +30,7 @@ int main()
             textlen = 0;
             strcpy(temp, "");
             strcpy(textrec, "T 00");
-            fscanf(f1, "%s %s %s %s %s", saddress, label, opcode, operand, objcode);
+            fscanf(output, "%s %s %s %s %s", saddress, label, opcode, operand, objcode);
             if (strcmp(objcode, "-") != 0)
             {
                 strcat(textrec, saddress);
@@ -45,12 +45,12 @@ int main()
             strcat(temp, objcode);
             strcat(temp, " ");
         }
-        fscanf(f1, "%s %s %s %s %s", saddress, label, opcode, operand, objcode);
+        fscanf(output, "%s %s %s %s %s", saddress, label, opcode, operand, objcode);
     }
     if (textlen != 0)
         printf("%s %x %s\n", textrec, textlen, temp);
 
     printf("E 00%s\n\n", startaddr);
-    fclose(f1);
+    fclose(output);
     return 0;
 }
