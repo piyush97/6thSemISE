@@ -3,31 +3,31 @@
 #include <stdlib.h>
 int main()
 {
-	FILE *f1, *f2, *f3, *f4;
-	f1 = fopen("input.txt", "r");
-	f3 = fopen("symtab.txt", "w");
-	f4 = fopen("output.txt", "w");
+	FILE *inputFile, *symtabFile, *outputFile;
+	inputFile = fopen("input.txt", "r");
+	symtabFile = fopen("symtab.txt", "w");
+	outputFile = fopen("output.txt", "w");
 	int lc, sa;
 	char label[20], opcode[20], operand[20];
-	fscanf(f1, "%s %s %s", label, opcode, operand);
+	fscanf(inputFile, "%s %s %s", label, opcode, operand);
 
 	if (strcmp(opcode, "START") == 0)
 	{
 		sa = strtol(operand, NULL, 16);
-		fprintf(f4, "%X\t%s\t%s\t%s\n", sa, label, opcode, operand);
+		fprintf(outputFile, "%X\t%s\t%s\t%s\n", sa, label, opcode, operand);
 	}
 	else
 		sa = 0;
 	lc = sa;
 
-	fscanf(f1, "%s %s %s", label, opcode, operand);
+	fscanf(inputFile, "%s %s %s", label, opcode, operand);
 	while (strcmp(opcode, "END") != 0)
 	{
-		fprintf(f4, "%X\t%s\t%s\t%s\n", lc, label, opcode, operand);
+		fprintf(outputFile, "%X\t%s\t%s\t%s\n", lc, label, opcode, operand);
 
 		if (strcmp(label, "-") != 0)
 		{
-			fprintf(f3, "%s\t%X\n", label, lc);
+			fprintf(symtabFile, "%s\t%X\n", label, lc);
 		}
 
 		if (strcmp(opcode, "WORD") == 0)
@@ -52,13 +52,13 @@ int main()
 			else
 				lc = lc + strlen(operand) - 3;
 		}
-		fscanf(f1, "%s %s %s", label, opcode, operand);
+		fscanf(inputFile, "%s %s %s", label, opcode, operand);
 	}
-	fprintf(f4, "%X\t%s\t%s\t%s\n", lc, label, opcode, operand);
+	fprintf(outputFile, "%X\t%s\t%s\t%s\n", lc, label, opcode, operand);
 
 	printf("\nOutput File generated as output.txt\n");
-	fclose(f1);
-	fclose(f4);
-	fclose(f3);
+	fclose(inputFile);
+	fclose(outputFile);
+	fclose(symtabFile);
 	return 0;
 }
