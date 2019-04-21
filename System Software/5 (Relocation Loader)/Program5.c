@@ -1,79 +1,106 @@
-//Pass-1 of two-pass assembler
+//Relocating loader using bit mask
 #include <stdio.h>
 #include <string.h>
 
+char bitmask[20];
+
+void convert(char hex[12])
+{
+	strcpy(bitmask, "");
+	for (int i = 0; i < strlen(hex); i++)
+	{
+		switch (hex[i])
+		{
+		case '0':
+			strcat(bitmask, "0000");
+			break;
+		case '1':
+			strcat(bitmask, "0001");
+			break;
+		case '2':
+			strcat(bitmask, "0010");
+			break;
+		case '3':
+			strcat(bitmask, "0011");
+			break;
+		case '4':
+			strcat(bitmask, "0100");
+			break;
+		case '5':
+			strcat(bitmask, "0101");
+			break;
+		case '6':
+			strcat(bitmask, "0110");
+			break;
+		case '7':
+			strcat(bitmask, "0111");
+			break;
+		case '8':
+			strcat(bitmask, "1000");
+			break;
+		case '9':
+			strcat(bitmask, "1001");
+			break;
+		case 'A':
+			strcat(bitmask, "1010");
+			break;
+		case 'B':
+			strcat(bitmask, "1011");
+			break;
+		case 'C':
+			strcat(bitmask, "1100");
+			break;
+		case 'D':
+			strcat(bitmask, "1101");
+			break;
+		case 'E':
+			strcat(bitmask, "1110");
+			break;
+		case 'F':
+			strcat(bitmask, "1111");
+			break;
+		}
+	}
+}
+
 void main()
 {
-	FILE *inputFile, *optabFile, *symtabFile, *outputFile;
-	inputFile = fopen("input.txt", "r");
-	symtabFile = fopen("symtab.txt", "w");
-	outputFile = fopen("output.txt", "w");
-	int lc, sa;
-	char label[20], opcode[20], operand[20];
-	fscanf(inputFile, "%s %s %s", label, opcode, operand);
+	FILE *f1;
+	f1 = fopen("input.txt", "r");
+	char type, objcode[20], progname[20], input[20], mask[20];
+	int psa, sa, addr, len, c = 0;
+	fscanf(f1, "%c %s %X %X", &type, progname, &psa, &len);
 
-	if (strcmp(opcode, "START") == 0)
+	printf("\nEnter Starting Address: ");
+	scanf("%x", &sa);
+
+	printf("Loading Program %s of length %06X starting at Address %06X :-\n", progname, len, (psa + sa));
+
+	fscanf(f1, "%s", input);
+	while (strcmp(input, "E") != 0)
 	{
-		sa = strtol(operand, NULL, 16);
-		fprintf(outputFile, "%X\t%s\t%s\t%s\n", sa, label, opcode, operand);
+		if (strcmp(input, "T") == 0)
+		{
+			c = 0;
+			fscanf(f1, "%X", &addr);
+			fscanf(f1, "%s", mask);
+			addr += sa;
+		}
+		convert(mask);
+		fscanf(f1, "%s", input);
+		if (strcmp(input, "T") == 0)
+			continue;
+		if (strcmp(input, "E") == 0)
+			break;
+		char sub[20];
+		strcpy(sub, &input[2]);
+		int add = strtol(sub, NULL, 16);
+		if (bitmask[c] == '1')
+			add = add + sa;
+
+		printf("%06X\t%c%c%X\n", addr, input[0], input[1], add);
+		c++;
+		addr += 3;
 	}
-	else
-		sa = 0;
-	lc = sa;
-
-	fscanf(inputFile, "%s %s %s", label, opcode, operand);
-	while (strcmp(opcode, "END") != 0)
-	{
-		fprintf(outputFile, "%X\t%s\t%s\t%s\n", lc, label, opcode, operand);
-
-		if (strcmp(label, "-") != 0)
-		{
-			fprintf(symtabFile, "%s\t%X\n", label, lc);
-		}
-
-		char tempcode[20], tempval[20];
-		optabFile = fopen("optab.txt", "r");
-		fscanf(optabFile, "%s %s", tempcode, tempval);
-		while (!feof(optabFile))
-		{
-			if (strcmp(opcode, tempcode) == 0)
-			{
-				lc += 3;
-				break;
-			}
-			fscanf(optabFile, "%s %s", tempcode, tempval);
-		}
-		fclose(optabFile);
-
-		if (strcmp(opcode, "WORD") == 0)
-		{
-			lc += 3;
-		}
-
-		if (strcmp(opcode, "RESW") == 0)
-		{
-			lc = lc + (3 * (strtol(operand, NULL, 10)));
-		}
-
-		if (strcmp(opcode, "RESB") == 0)
-		{
-			lc = lc + strtol(operand, NULL, 10);
-		}
-
-		if (strcmp(opcode, "BYTE") == 0)
-		{
-			if (operand[0] == 'X')
-				lc++;
-			else
-				lc = lc + strlen(operand) - 3;
-		}
-
-		fscanf(inputFile, "%s %s %s", label, opcode, operand);
-	}
-	fprintf(outputFile, "%X\t%s\t%s\t%s\n", lc, label, opcode, operand);
-
-	printf("\nOutput File generated as output.txt\n");
-	fclose(inputFile);
-	fclose(outputFile);
-	fclose(symtabFile);
+	fclose(f1);
 }
