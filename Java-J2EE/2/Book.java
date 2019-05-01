@@ -1,9 +1,9 @@
-public class Bank implements Comparable<Bank> {
+public class Book implements Comparable<Book> {
 
     String title, author, publisher;
     Double price;
 
-    Bank(String t, String aut, String pub, Double pr) {
+    Book(String t, String aut, String pub, Double pr) {
         title = t;
         author = aut;
         publisher = pub;
@@ -19,7 +19,7 @@ public class Bank implements Comparable<Bank> {
                 + "price " + price;
     }
 
-    public int compareTo(Bank o) {
+    public int compareTo(Book o) {
         return getPrice().compareTo(o.getPrice());
     }
 }
