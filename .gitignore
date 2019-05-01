@@ -2,3 +2,4 @@
 .vscode
 a.out
 .dSYM
+*.class
