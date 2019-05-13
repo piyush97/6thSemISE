@@ -3,3 +3,4 @@
 a.out
 .dSYM
 *.class
+lex.yy.c
