@@ -1,13 +1,116 @@
-# 6thSemISE
-6th Sem ISE Repo
+<h1 align="center"> 6thSemISE </h1>
+<p align="center"> 6th Sem ISE Repo</p>
 
-File structure
+## File structure
 
 ```
+├─ .github
+│  └─ ISSUE_TEMPLATE
+│  │  ├─ bug_report.md
+│  │  └─ feature_request.md
+├─ .gitignore
 ├─ Design Patterns with Java
-│  └─ 1
+│  ├─ Abstract-Factory
+│  │  ├─ AbstractFactory.mdj
+│  │  ├─ Factory.java
+│  │  ├─ abled.java
+│  │  ├─ cicA.java
+│  │  ├─ cicD.java
+│  │  ├─ client.java
+│  │  ├─ differentlyAbled.java
+│  │  ├─ fooA.java
+│  │  ├─ fooD.java
+│  │  ├─ outdoorAdventure.java
+│  │  ├─ outdoorRegular.java
+│  │  ├─ paraA.java
+│  │  ├─ paraD.java
+│  │  ├─ trekA.java
+│  │  └─ trekD.java
+│  ├─ Adapter
+│  │  ├─ CalcTax.class
+│  │  ├─ CalcTax.java
+│  │  ├─ Item.class
+│  │  ├─ Item.java
+│  │  ├─ MyMauritiusTax.class
+│  │  ├─ MyMauritiusTax.java
+│  │  ├─ NewMauritiusTax.class
+│  │  ├─ NewMauritiusTax.java
+│  │  ├─ SwedenTax.class
+│  │  ├─ SwedenTax.java
+│  │  ├─ TaxAdapterDemo.class
+│  │  ├─ TaxAdapterDemo.java
+│  │  └─ adapter.png
+│  ├─ Bridge
+│  │  ├─ BridgeClientMain.java
+│  │  ├─ DecathlonCustomer.java
+│  │  ├─ DiscountType1.java
+│  │  ├─ DiscountType2.java
+│  │  ├─ RegCust.java
+│  │  ├─ SeniorCitizenCust.java
+│  │  ├─ bridge.png
+│  │  └─ iDiscountCalculator.java
+│  ├─ Decorator
+│  │  └─  pkgDecorator
+│  │  │  ├─ AdventureGames.java
+│  │  │  ├─ Athletics.java
+│  │  │  ├─ BoardGames.java
+│  │  │  ├─ CourtGames.java
+│  │  │  ├─ DecathlonPOS.java
+│  │  │  ├─ DecoratorIndoor.java
+│  │  │  ├─ DecoratorOutdoor.java
+│  │  │  ├─ GamesOnTable.java
+│  │  │  ├─ IndoorSports.java
+│  │  │  ├─ Main.java
+│  │  │  ├─ OutdoorSports.java
+│  │  │  ├─ StadiumGames.java
+│  │  │  └─ decorator.png
+│  ├─ Facade
+│  │  ├─ Client.java
+│  │  ├─ Facade.java
+│  │  ├─ ItemsPurchased.java
+│  │  ├─ ProcessSales.java
+│  │  ├─ facade.mdj
+│  │  └─ facade.png
+│  ├─ Factory-method
+│  │  ├─ Aged.java
+│  │  ├─ CategoryFactory.java
 │  │  ├─ Customer.java
-│  │  └─ Discount.java
+│  │  ├─ FactoryMain.java
+│  │  ├─ Teens.java
+│  │  ├─ factory_method-uml.png
+│  │  └─ kidds.java
+│  ├─ Observer
+│  │  └─ Observer_Lab #5
+│  │  │  ├─ AsiaCustomer.java
+│  │  │  ├─ AsiaDiscountDecathlon.java
+│  │  │  ├─ AsiaFestivalSale.java
+│  │  │  ├─ DecathlonObserver.java
+│  │  │  ├─ DecathlonSubject.java
+│  │  │  ├─ ObserverMainClientDecathlon.java
+│  │  │  └─ observer.png
+│  ├─ Singleton
+│  │  ├─ Hist.txt
+│  │  ├─ History.class
+│  │  ├─ History.java
+│  │  ├─ Main.class
+│  │  ├─ Main.java
+│  │  └─ singleton.png
+│  ├─ Strategy
+│  │  ├─ DecathlonCustomer.java
+│  │  ├─ DiscountType1.java
+│  │  ├─ DiscountType2.java
+│  │  ├─ FirstTimeCustomer.java
+│  │  ├─ RegCustomer.java
+│  │  ├─ StrategyClientMain.java
+│  │  ├─ iDiscountCalculator.java
+│  │  └─ strategy.png
+│  └─ Template
+│  │  ├─ ItemsList.java
+│  │  ├─ OfflineOrderProcessing.java
+│  │  ├─ OnlineOrderProcessing.java
+│  │  ├─ OrderProcessing.java
+│  │  ├─ TemplateMethodClient.java
+│  │  └─ template.png
 ├─ Java-J2EE
 │  ├─ 1
 │  │  ├─ DataBaseCallers.class
@@ -37,7 +140,7 @@ File structure
 │  │  ├─ CalculateTax.java
 │  │  └─ index.html
 ├─ README.md
-└─ System Software
+├─ System Software
 │  ├─ 1 (Pass 1 of 1)
 │  │  ├─ Program1.c
 │  │  ├─ a.out
@@ -98,4 +201,5 @@ File structure
 │  │  └─ 3
 │  │  │  ├─ 3.l
 │  │  │  └─ 3.y
+└─ _config.yml
 ```
