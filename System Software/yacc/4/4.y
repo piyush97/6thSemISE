@@ -1,20 +1,31 @@
 %{
-  #include<stdio.h>
+    #include <stdio.h>
+    #include <stdlib.h>
 %}
-%token A B
-%left A B
+
+%token A B NL
+
 %%
-S: A S
-|S B
-|
+
+stmt : C D NL {printf("Valid\n"); exit(0);}
 ;
+
+C : A C
+| A
+| ;
+
+D : B D
+| B
+| ;
+
 %%
-void yyerror() {
-  printf("\nInvalid Expression\n");
-  exit(0);
+
+int yyerror(char *msg) {
+    printf ("Invalid %s", msg);
+    exit(0);
 }
-void main() {
-  printf("Enter an Expression: ");
-  yyparse();
-  printf("\nValid Expression\n");
+
+int main() {
+    yyparse();
+    return 0;
 }
