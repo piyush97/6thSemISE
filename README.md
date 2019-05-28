@@ -3,6 +3,9 @@
 
 # How to run and setup Java Servlet Code: https://www.youtube.com/watch?v=nv8r9h5Pnss
 
+Guide: <a href="JAVAExec.pdf"> Click Here to setup in 2 minutes </a>
+
+--------
 ## File structure
 
 ```
