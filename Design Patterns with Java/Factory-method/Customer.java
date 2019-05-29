@@ -1,13 +1,10 @@
-public abstract class Customer 
-{
-
-	public abstract void printCustomer();
-	public abstract void printRate();
-
-	public Customer()
-	{
-		printCustomer();
-		printRate();
-	}
-
+public class Customer {
+    String description;
+    Discount discount;
+    String getDescription(){
+        return description;
+    }
+    void setDiscount(Discount discount){
+        this.discount = discount;
+    }
 }
