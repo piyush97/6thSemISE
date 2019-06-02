@@ -1,5 +1,3 @@
-package pkgDecorator;
-
 public abstract class DecoratorIndoor extends DecathlonPOS{
 	String game;
 	DecoratorIndoor(String game){

@@ -1,5 +1,3 @@
-package pkgDecorator;
-
 public class Main {
 
 	public static void main(String[] args) {
@@ -13,6 +11,7 @@ public class Main {
 		System.out.println(in_sp.getCurrentStock());
 		ot_sp = new AdventureGames(ot_sp,"para-gliding");
 		ot_sp = new Athletics(ot_sp,"high-jump");
+		ot_sp = new StadiumGames(ot_sp,"cricket");
 		System.out.println(ot_sp.getCurrentStock());
 	}
 

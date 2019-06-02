@@ -1,5 +1,3 @@
-package pkgDecorator;
-
 public class CourtGames extends DecoratorIndoor {
 	DecathlonPOS dp;
 	CourtGames(DecathlonPOS dp,String game){

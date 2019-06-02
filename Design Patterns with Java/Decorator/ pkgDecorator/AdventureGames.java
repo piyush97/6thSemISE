@@ -1,5 +1,3 @@
-package pkgDecorator;
-
 public class AdventureGames extends DecoratorOutdoor{
 	DecathlonPOS dp;
 	AdventureGames(DecathlonPOS dp,String game){

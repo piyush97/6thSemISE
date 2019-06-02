@@ -1,5 +1,3 @@
-package pkgDecorator;
-
 public class GamesOnTable extends DecoratorIndoor{
 	DecathlonPOS dp;
 	GamesOnTable(DecathlonPOS dp,String game){
