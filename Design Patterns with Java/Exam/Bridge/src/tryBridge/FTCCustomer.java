@@ -1,5 +1,3 @@
-package tryBridge;
-
 public class FTCCustomer extends Customer {
 
 	public FTCCustomer(String name, int age, Discount d) {

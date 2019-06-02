@@ -1,5 +1,3 @@
-package tryBridge;
-
 public class RCCustomer extends Customer {
 
 	public RCCustomer(String name, int age, Discount d) {

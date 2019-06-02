@@ -1,5 +1,3 @@
-package tryBridge;
-
 public abstract class Customer {
 
 	String name;

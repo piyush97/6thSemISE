@@ -1,5 +1,3 @@
-package tryBridge;
-
 public class BridgeDemo {
 
 	public static void main(String[] args) {
@@ -27,6 +25,18 @@ public class BridgeDemo {
 		
 		c2.setDiscount(new Discount4());
 		c2.showBill(100);
+		
+		Customer c3=new SSCustomer("Anjaneya", 20, new Discount1());
+		c3.showBill(100);
+		
+		c3.setDiscount(new Discount2());
+		c3.showBill(100);
+		
+		c3.setDiscount(new Discount3());
+		c3.showBill(100);
+		
+		c3.setDiscount(new Discount4());
+		c3.showBill(100);
 		
 
 	}
