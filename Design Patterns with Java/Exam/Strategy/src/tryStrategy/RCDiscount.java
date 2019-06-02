@@ -1,13 +1,11 @@
 package tryStrategy;
 
-import java.nio.file.DirectoryStream;
-
-public class RCDiscount implements Discount{
+public class RCDiscount implements Discount {
 
 	@Override
 	public float calcDiscount(float amount) {
 		// TODO Auto-generated method stub
-		return 0.12f*amount;
+		return 0.12f * amount;
 	}
 
 }
