@@ -1,5 +1,5 @@
 <h1 align="center"> 6thSemISE </h1>
-<p align="center"> 6th Sem ISE Repo</p>
+<p align="center">Life Saviour</p>
 
 # How to run and setup Java Servlet Code: https://www.youtube.com/watch?v=nv8r9h5Pnss
 
